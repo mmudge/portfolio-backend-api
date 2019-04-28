@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   devise_for :users,
              path: '',
              path_names: {
@@ -13,6 +12,10 @@ Rails.application.routes.draw do
                registrations: 'registrations'
              }
 
-  resources :messages
-  root to: 'messages#index'
+
+  resources :users, only: [:index, :show] do
+    resources :messages
+  end
+
+  root to: 'registraions#signup'
 end
