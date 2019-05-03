@@ -15,7 +15,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show] do
     resources :messages
+    resources :post
   end
+
+  resources :post, only: [:index, :show]
 
   root to: 'registrations#signup'
 end

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+    include DeviseWhitelist
 
     def render_resource(resource)
         if resource.errors.empty?

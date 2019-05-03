@@ -6,4 +6,7 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
 
   has_many :messages
+  has_many :posts
+
+  has_one_attached :profile_pic
 end
