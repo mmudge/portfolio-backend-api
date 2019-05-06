@@ -1,61 +1,48 @@
 class PostsController < ApplicationController
     before_action :set_post, only: [:show, :update, :destroy]
-    before_action :authenticate_user!, :only [:create, :update, :destroy]
+    before_action :authenticate_user!, only: [:create, :update, :destroy]
 
     def index
-        posts = Post.all
-        render json: @posts
+      @posts = Post.all
+      render json: @posts
     end
 
     def show
-        render json: @post
+      render json: @post
     end
 
     def create
-        @post = Post.new(post_params)
-
-        if @post.save
+      @post = Post.new(post_params)
+      if @post.save
         render json: @post, status: :created
-        else
+      else
         render json: @post.errors, status: :unprocessable_entity
-        end
+      end
     end
 
     def update
-        if @post.update(post_params)
-        render json: @post
-        else
-        render json: @post.errors, status: :unprocessable_entity
-        end
+      if @post.update(post_params)
+      render json: @post
+      else
+      render json: @post.errors, status: :unprocessable_entity
+      end
     end
 
     def destroy
-        @post.destroy
+      @post.destroy
     end
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_post
       @post = Post.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def post_params
     #   params.fetch(:message, {})
       params.require(:post).permit(:title, :user_id, :photo)
     end
-
-
-end
-
-
-
-
-
-
-
-  # DELETE /xes/1
 
 
 end
