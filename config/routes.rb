@@ -19,5 +19,6 @@ Rails.application.routes.draw do
 
   resources :posts
 
+  get 'current_user', to: 'users#current'
   root to: 'registrations#signup'
 end
