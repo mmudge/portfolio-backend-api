@@ -1,30 +1,35 @@
 class MessagesController < ApplicationController
     before_action :set_message, only: [:show, :update, :destroy]
     before_action :authenticate_user!
-  # GET /xes
-  def index
-    @messages = Message.all
 
-    render json: @messages
+  def index
+    messages = Message.all
+    render json: messages
   end
 
-  # GET /xes/1
+
   def show
     render json: @message
   end
 
-  # POST /xes
-  def create
-    @message = Message.new(message_params)
 
-    if @message.save
-      render json: @message, status: :created
+  def create
+    # sender = User.find([:sender_id])
+    sender = current_user
+    receiver = User.find(message_params[:user_id])
+
+    # message = Message.new(message_params)
+    message = { subject: message_params[:subject], body: message_params[:body], user_id: receiver.id, sender_id: sender.id }
+
+    m = receiver.messages.create(message)
+
+    if m.save
+      render json: m, status: :created
     else
-      render json: @message.errors, status: :unprocessable_entity
+      render json: m.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /xes/1
   def update
     if @message.update(message_params)
       render json: @message
@@ -33,20 +38,18 @@ class MessagesController < ApplicationController
     end
   end
 
-  # DELETE /xes/1
   def destroy
     @message.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_message
       @message = Message.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
+
     def message_params
-    #   params.fetch(:message, {})
-      params.require(:message).permit(:subject, :body, :user_id)
+      params.require(:message).permit(:subject, :body, :user_id, :sender_id)
     end
 end
