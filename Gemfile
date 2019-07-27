@@ -49,4 +49,6 @@ gem 'devise', '~> 4.6', '>= 4.6.2'
 gem 'devise-jwt', '~> 0.5.9'
 gem 'cloudinary', '~> 1.11', '>= 1.11.1'
 
+gem 'rb-readline'
+
 
