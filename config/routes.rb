@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     resources :messages
     get 'received_messages', to: 'messages#received_messages'
+    get 'sent_messages', to: 'messages#sent_messages'
   end
 
   resources :posts

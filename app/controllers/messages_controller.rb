@@ -17,6 +17,12 @@ class MessagesController < ApplicationController
   end
 
   def sent_messages
+    messages = Message.where(sender_id: current_user.id)
+    if messages.empty?
+      render json: { error: "No messages received yet" }
+    else
+      render json: messages
+    end
   end
 
 
