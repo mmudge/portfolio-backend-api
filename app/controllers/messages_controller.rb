@@ -7,6 +7,18 @@ class MessagesController < ApplicationController
     render json: messages
   end
 
+  def received_messages
+    messages = Message.where(user_id: current_user.id)
+    if messages.empty?
+      render json: { error: "No messages received yet" }
+    else
+      render json: messages
+    end
+  end
+
+  def sent_messages
+  end
+
 
   def show
     render json: @message
@@ -18,12 +30,11 @@ class MessagesController < ApplicationController
     sender = current_user
     receiver = User.find(message_params[:user_id])
 
-    # message = Message.new(message_params)
+
     message = { subject: message_params[:subject], body: message_params[:body], user_id: receiver.id, sender_id: sender.id }
+    m = receiver.messages.new(message)
 
-    m = receiver.messages.create(message)
-
-    if m.save
+    if m.save!
       render json: m, status: :created
     else
       render json: m.errors, status: :unprocessable_entity
