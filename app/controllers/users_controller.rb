@@ -6,8 +6,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        # user = User.find(params[:id])
-        user = User.find_by_sql("SELECT * FROM users where username = '#{params[:id].gsub("'", "`")}'").first
+        user = User.find(params[:id])
+        # user = User.find_by_sql("SELECT * FROM users where username = '#{params[:id].gsub("'", "`")}'").first
         render json: user
     end
 
