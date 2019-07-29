@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts
+  resources :comments
 
 
   get 'current_user', to: 'users#current'

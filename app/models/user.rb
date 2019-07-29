@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :messages
   has_many :posts
+  has_many :comments
 
   has_one_attached :profile_pic
 end
