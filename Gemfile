@@ -50,5 +50,4 @@ gem 'devise-jwt', '~> 0.5.9'
 gem 'cloudinary', '~> 1.11', '>= 1.11.1'
 
 gem 'rb-readline'
-gem 'pry-coolline'
 
