@@ -15,8 +15,10 @@ class CommentsController < ApplicationController
 
   def create
     post = Post.find(params[:post_id])
-    comment = Comment.new(comment_params).merge(object: post)
-    if comment.save!
+    # comment = Comment.new(comment_params)
+    post.comments.build(comment_params)
+    
+    if post.comments.save!
       render json: comment, status: :created
     else
       render json: comment.errors, status: :unprocessable_entity
