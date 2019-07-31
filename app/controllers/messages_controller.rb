@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
     receiver = User.find(message_params[:user_id])
 
 
-    message = { subject: message_params[:subject], body: message_params[:body], user_id: receiver.id, sender_id: sender.id }
+    message = { subject: message_params[:subject], body: message_params[:body], user_id: receiver.id, sender_id: sender.id, state: "unread" }
     m = receiver.messages.new(message)
 
     if m.save!
@@ -67,6 +67,6 @@ class MessagesController < ApplicationController
 
 
     def message_params
-      params.require(:message).permit(:subject, :body, :user_id, :sender_id)
+      params.require(:message).permit(:subject, :body, :user_id, :sender_id, :state)
     end
 end
