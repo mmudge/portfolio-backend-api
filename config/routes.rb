@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   end
 
   resources :posts
-  resources :comments
-
+  # resources :comments
+  post 'posts/:post_id/comments', to: "comments#create"
 
   get 'current_user', to: 'users#current'
   root to: 'registrations#signup'

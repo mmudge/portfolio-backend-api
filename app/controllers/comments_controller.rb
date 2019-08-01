@@ -14,9 +14,20 @@ class CommentsController < ApplicationController
 
 
   def create
-    post = Post.find(params[:post_id])
-    # comment = Comment.new(comment_params)
+    post_id = params[:post_id]
+    post = Post.find(post_id) if post_id
+
     comment = post.comments.build(comment_params)
+
+
+
+    # subject = if post_id = params[:post_id]
+    #   Post.find(ticket_id)
+    # else
+    #   raise "Don't know how to create comment for this route"
+    # end
+
+    # comment = subject.comments.build(comment_params)
 
     if comment.save!
       render json: comment, status: :created
@@ -45,6 +56,6 @@ class CommentsController < ApplicationController
 
 
     def comment_params
-      params.require(:comment).permit(:remark, :user_id, :post_id)
+      params.require(:comment).permit(:remark, :user_id)
     end
 end
