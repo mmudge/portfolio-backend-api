@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     before_action :authenticate_user!
 
   def index
-    comments = Comment.all
+    comments = Comment.where(object_id: params[:post_id])
     render json: comments
   end
 

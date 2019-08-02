@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :posts
   # resources :comments
   post 'posts/:post_id/comments', to: "comments#create"
+  get 'posts/:post_id/comments', to: "comments#index"
 
   get 'current_user', to: 'users#current'
   root to: 'registrations#signup'
