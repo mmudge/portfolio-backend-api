@@ -3,20 +3,20 @@ class PostsController < ApplicationController
     before_action :authenticate_user!, only: [:create, :update, :destroy]
 
     def index
-      @posts = Post.all
-      render json: @posts
+      posts = Post.all
+      render json: posts.as_json
     end
 
     def show
-      render json: @post
+      render json: @post.as_json
     end
 
     def create
-      @post = Post.new(post_params)
-      if @post.save
-        render json: @post, status: :created
+      post = Post.new(post_params)
+      if post.save
+        render json: post, status: :created
       else
-        render json: @post.errors, status: :unprocessable_entity
+        render json: post.errors, status: :unprocessable_entity
       end
     end
 
