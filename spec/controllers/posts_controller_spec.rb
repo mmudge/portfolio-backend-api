@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
   before :each do
-    @user_one = User.create!(email: 'tester@test.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
+    @user_one = create(:user)
 
   end
 
@@ -11,6 +11,4 @@ RSpec.describe PostsController, type: :controller do
       expect(@user_one).to be_valid
     end
   end
-
-
 end
