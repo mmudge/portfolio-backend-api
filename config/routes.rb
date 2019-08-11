@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   end
 
   resources :posts
+
+  put 'posts/:id', to: "posts#update"
   # resources :comments
   post 'posts/:post_id/comments', to: "comments#create"
   get 'posts/:post_id/comments', to: "comments#index"

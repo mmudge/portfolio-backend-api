@@ -36,10 +36,30 @@ class PostsController < ApplicationController
       # end
 
     def update
-      if @post.update(post_params)
-      render json: @post
+      if post_params[:like]
+        if !@post.like
+          @post.like = 1
+        else
+          @post.like += 1
+        end
+      end
+
+      if post_params[:dislike]
+        if !@post.dislike
+          @post.dislike = 1
+        else
+          @post.dislike += 1
+        end
+      end
+
+      if post_params[:title]
+        @post.title = post_params[:title]
+      end
+
+      if @post.save!
+        render json: @post
       else
-      render json: @post.errors, status: :unprocessable_entity
+        render json: @post.errors, status: :unprocessable_entity
       end
     end
 
@@ -60,7 +80,7 @@ class PostsController < ApplicationController
 
     def post_params
     #   params.fetch(:message, {})
-      params.require(:post).permit(:title, :user_id, :photo)
+      params.require(:post).permit(:title, :user_id, :photo, :like, :dislike)
     end
 
 
