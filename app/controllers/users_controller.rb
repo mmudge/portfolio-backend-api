@@ -12,11 +12,11 @@ class UsersController < ApplicationController
     end
 
     def current
-        if user = current_user
+        user = current_user
+        if user
             render json: user
         else
-            raise 'user not logged in'
-            render json: user.errors, status: :unprocessable_entity
+            render json: { errors: "no logged in user" }, status: :unprocessable_entity
         end
     end
 end
