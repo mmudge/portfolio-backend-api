@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
     def create
       post = Post.new(post_params)
-      attach_photo(post) if post_params[:photo].present?
+      # attach_photo(post) if post_params[:photo].present?
 
       if post.save
         render json: post, status: :created
@@ -70,18 +70,17 @@ class PostsController < ApplicationController
 
   private
 
-  def attach_photo(item)
-    item.photo.attach(post_params[:photo])
+  # def attach_photo(item)
+  #   item.photo.attach(post_params[:photo])
+  # end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 
-    def set_post
-      @post = Post.find(params[:id])
-    end
-
-    def post_params
-    #   params.fetch(:message, {})
-      params.require(:post).permit(:title, :user_id, :photo, :like, :dislike)
-    end
+  def post_params
+    params.require(:post).permit(:title, :user_id, :photo, :like, :dislike)
+  end
 
 
 end
