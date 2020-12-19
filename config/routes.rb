@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+    root to: 'pages#index'
+
   devise_for :users,
              path: '',
              path_names: {
@@ -27,5 +29,5 @@ Rails.application.routes.draw do
   get 'posts/:post_id/comments', to: "comments#index"
 
   get 'current_user', to: 'users#current'
-  root to: 'pages#main'
+
 end
