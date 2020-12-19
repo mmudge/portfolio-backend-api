@@ -27,5 +27,5 @@ Rails.application.routes.draw do
   get 'posts/:post_id/comments', to: "comments#index"
 
   get 'current_user', to: 'users#current'
-  root to: 'registrations#signup'
+  root to: 'pages#main'
 end

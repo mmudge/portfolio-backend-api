@@ -57,4 +57,3 @@ gem 'cloudinary', '~> 1.11', '>= 1.11.1'
 gem 'rb-readline'
 
 gem 'active_model_serializers'
-
