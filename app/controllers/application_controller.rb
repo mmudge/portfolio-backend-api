@@ -21,4 +21,8 @@ class ApplicationController < ActionController::API
     ]
     }, status: :bad_request
   end
+
+  # def current_token
+  #   @current_token ||= request.env['warden-jwt_auth.token']
+  # end
 end
