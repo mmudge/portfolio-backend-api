@@ -15,5 +15,9 @@ Rails.application.routes.draw do
 
   get 'current_user', to: 'users#current'
 
+  get 'projects/:id', to: 'projects#show'
+  put 'projects/:id', to: 'projects#update'
+  delete 'projects/:id', to: 'projects#destroy'
   get 'projects', to: 'projects#index'
+  post 'projects', to: 'projects#create'
 end
