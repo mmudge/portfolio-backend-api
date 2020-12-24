@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   delete 'projects/:id', to: 'projects#destroy'
   get 'projects', to: 'projects#index'
   post 'projects', to: 'projects#create'
+
+  resources :posts
 end
