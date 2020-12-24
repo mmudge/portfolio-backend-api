@@ -68,9 +68,9 @@ RSpec.describe ProjectsController, type: :controller do
     end
 
     context 'if a user has a valid session' do
-      it "creates a project" do
+      it "updates the project" do
         valid_session
-        post :create, params: { id: @project.id,  project: { title: 'bla' } }
+        post :create, params: { id: @project.id, project: { title: 'bla' } }
 
         assert_response :success
         expect(response_json["title"]).to eq('bla')

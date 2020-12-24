@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
 
   def update
     project = Project.find(params[:id])
-    project.assign_attributes(post_params)
+    project.assign_attributes(project_params)
 
     if project.save
       render json: project
