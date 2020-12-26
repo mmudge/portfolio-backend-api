@@ -2,7 +2,13 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    projects = Project.all
+    # TODO add pundit / make this better
+    if current_user.email == 'michaeltmudge@gmail.com'
+      projects = Project.all
+    else
+      projects = Project.all.where(published: true)
+    end
+
     render json: projects
   end
 
@@ -44,6 +50,6 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:title)
+    params.require(:project).permit(:title, :description, :link, :published)
   end
 end
