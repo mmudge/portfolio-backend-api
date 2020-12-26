@@ -2,12 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    # TODO add pundit / make this better
-    if current_user.email == 'michaeltmudge@gmail.com'
-      projects = Project.all
-    else
-      projects = Project.all.where(published: true)
-    end
+    projects = Project.all
 
     render json: projects
   end
