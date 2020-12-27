@@ -23,7 +23,7 @@ RSpec.describe ProjectsController, type: :controller do
   end
 
   describe 'GET projects#show' do
-    it "return the requested post" do
+    it "returns the requested project" do
       get :show, params: { id: @project.id }
 
       assert_response :success
@@ -74,6 +74,19 @@ RSpec.describe ProjectsController, type: :controller do
 
         assert_response :success
         expect(response_json["title"]).to eq('bla')
+      end
+
+      it "allows technologies to be added to a project by adding technology_ids in the params" do
+        technology = create(:technology, name: 'my name')
+        valid_session
+        post :create, params: { id: @project.id, project: { title: 'with technologies', technology_ids: [technology.id] } }
+
+        assert_response :success
+
+        expect(response_json["title"]).to eq('with technologies')
+
+        expect(response_json["technologies"].length).to eq(1)
+        expect(response_json["technologies"][0]["name"]).to eq(technology.name)
       end
     end
   end

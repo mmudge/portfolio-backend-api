@@ -21,5 +21,10 @@ Rails.application.routes.draw do
   get 'projects', to: 'projects#index'
   post 'projects', to: 'projects#create'
 
+  put 'technologies/:id', to: 'technologies#update'
+  delete 'technologies/:id', to: 'technologies#destroy'
+  get 'technologies', to: 'technologies#index'
+  post 'technologies', to: 'technologies#create'
+
   resources :posts
 end

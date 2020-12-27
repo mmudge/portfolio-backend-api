@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
     project = Project.new(project_params)
 
     if project.save
-      render json: project, status: :created
+      render json: project.as_json, status: :created
     else
       render json: project.errors, status: :unprocessable_entity
     end
@@ -44,6 +44,6 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:title, :description, :link, :github_link, :published)
+    params.require(:project).permit(:title, :description, :link, :github_link, :published, technology_ids: [])
   end
 end
