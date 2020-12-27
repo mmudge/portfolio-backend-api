@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_223329) do
+ActiveRecord::Schema.define(version: 2020_12_27_004932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2020_12_26_223329) do
     t.boolean "published"
     t.string "link"
     t.text "description"
+    t.string "github_link"
   end
 
   create_table "users", force: :cascade do |t|
