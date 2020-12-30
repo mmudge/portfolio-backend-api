@@ -26,5 +26,8 @@ Rails.application.routes.draw do
   get 'technologies', to: 'technologies#index'
   post 'technologies', to: 'technologies#create'
 
+  post 'messages', to: 'messages#create'
+  get 'messages', to: 'messages#index'
+
   resources :posts
 end

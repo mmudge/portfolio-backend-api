@@ -1,72 +1,26 @@
 class MessagesController < ApplicationController
-    before_action :set_message, only: [:show, :update, :destroy]
-    before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:create]
 
   def index
     messages = Message.all
     render json: messages
   end
 
-  def received_messages
-    messages = Message.where(user_id: current_user.id)
-    if messages.empty?
-      render json: { error: "No messages received yet" }
-    else
-      render json: messages
-    end
-  end
-
-  def sent_messages
-    messages = Message.where(sender_id: current_user.id)
-    if messages.empty?
-      render json: { error: "No messages received yet" }
-    else
-      render json: messages
-    end
-  end
-
-
-  def show
-    render json: @message
-  end
-
-
   def create
-    # sender = User.find([:sender_id])
-    sender = current_user
-    receiver = User.find(message_params[:user_id])
+    puts 'message params', message_params
+    message = Message.new(message_params)
 
 
-    message = { subject: message_params[:subject], body: message_params[:body], user_id: receiver.id, sender_id: sender.id, state: "unread" }
-    m = receiver.messages.new(message)
-
-    if m.save!
-      render json: m, status: :created
+    if message.save
+      ContactMailer.with(email: message_params[:email], name: message_params[:name], body: message_params[:body]).contact_message.deliver_now
+      render json: message, status: :created
     else
-      render json: m.errors, status: :unprocessable_entity
+      render json: message.errors, status: :unprocessable_entity
     end
-  end
-
-  def update
-    if @message.update(message_params)
-      render json: @message
-    else
-      render json: @message.errors, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @message.destroy
   end
 
   private
-
-    def set_message
-      @message = Message.find(params[:id])
-    end
-
-
-    def message_params
-      params.require(:message).permit(:subject, :body, :user_id, :sender_id, :state)
-    end
+  def message_params
+    params.require(:message).permit(:body, :name, :email)
+  end
 end
