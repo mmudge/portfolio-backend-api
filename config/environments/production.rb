@@ -84,4 +84,18 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+  host = 'https://mmudge-portfolio-api.herokuapp.com/'
+  config.action_mailer.default_url_options = { host: host }
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => ENV['GMAIL_ACCOUNT_NAME'],
+    :password             => ENV['GMAIL_APP_PASSWORD'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 end

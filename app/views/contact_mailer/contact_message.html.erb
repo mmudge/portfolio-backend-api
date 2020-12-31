@@ -9,6 +9,6 @@
     <h5>from: <%= @email %></h5>
 
     <h6>Message:</h6>
-    <p><%= @message %></p>
+    <p><%= @message.html_safe %></p>
   </body>
 </html>
