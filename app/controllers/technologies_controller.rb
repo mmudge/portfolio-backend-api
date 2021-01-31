@@ -38,6 +38,6 @@ class TechnologiesController < ApplicationController
 
   private
   def technology_params
-    params.require(:technology).permit(:name, :icon, :color)
+    params.require(:technology).permit(:name, :icon, :color, :hierarchy, :text)
   end
 end
