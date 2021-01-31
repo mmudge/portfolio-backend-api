@@ -14,5 +14,13 @@ RSpec.describe SeedTechnologies do
         expect(t.hierarchy).to be_truthy
       end
     end
+
+    it "updates a technology if a technology already exists with the same name" do
+      technology = create(:technology, name: 'TypeScript')
+      SeedTechnologies.seed
+
+      technology = Technology.find(technology.id)
+      expect(technology.icon).to eq('fas fa-code')
+    end
   end
 end

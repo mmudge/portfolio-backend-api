@@ -195,12 +195,18 @@ class SeedTechnologies
     ]
 
     created_count = 0
+    updated_count = 0
 
     technologies.each_with_index do |technology, index|
-      Technology.create!(name: technology[:title], text: technology[:text], color: technology[:color], icon: technology[:color], hierarchy: index + 1)
-      created_count += 1
+      if t = Technology.find_by_name(technology[:title])
+        t.update!(name: technology[:title], text: technology[:text], color: technology[:color], icon: technology[:icon], hierarchy: index + 1)
+        updated_count += 1
+      else
+        Technology.create!(name: technology[:title], text: technology[:text], color: technology[:color], icon: technology[:icon], hierarchy: index + 1)
+        created_count += 1
+      end
     end
 
-    puts "Created #{ created_count } technologies"
+    puts "Created #{ created_count } and updated #{ updated_count } technologies"
   end
 end
