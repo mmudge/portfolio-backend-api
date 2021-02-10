@@ -50,6 +50,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'dotenv-rails', groups: [:development, :test, :production]
+
+gem 'dry-configurable', '~> 0.9.0'
 gem 'devise', '~> 4.6', '>= 4.6.2'
 gem 'devise-jwt', '~> 0.5.9'
 gem 'cloudinary', '~> 1.11', '>= 1.11.1'
@@ -57,3 +59,6 @@ gem 'cloudinary', '~> 1.11', '>= 1.11.1'
 gem 'rb-readline'
 
 gem 'active_model_serializers'
+
+gem 'httparty', '~> 0.13.7'
+gem 'uri'

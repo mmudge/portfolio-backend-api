@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pexel_photos_controller/index'
   root to: 'pages#index'
 
   devise_for :users,
@@ -28,6 +29,8 @@ Rails.application.routes.draw do
 
   post 'messages', to: 'messages#create'
   get 'messages', to: 'messages#index'
+
+  get 'project_photos', to: 'pexel_photos#index'
 
   resources :posts
 end
