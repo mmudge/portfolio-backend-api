@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_31_165653) do
+ActiveRecord::Schema.define(version: 2021_02_16_031251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2021_01_31_165653) do
     t.string "link"
     t.text "description"
     t.string "github_link"
+    t.integer "hierarchy"
   end
 
   create_table "projects_technologies", id: false, force: :cascade do |t|
